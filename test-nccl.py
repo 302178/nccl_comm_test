@@ -83,7 +83,7 @@ def main():
             world_size=world_size,
             shape=shape,
             num_requests=num_requests,
-            device_id=0  # 确保每个 worker 使用不同的 GPU
+            device_id=0  
         )
         for i in range(world_size)
     ]
@@ -95,7 +95,7 @@ def main():
     start_times, end_times = (results[0], results[1]) if ranks[0] == 0 else (results[1], results[0])
 
     # 输出每个请求的传输时间和带宽
-    elem_size = torch.tensor([], dtype=torch.float32).element_size()
+    elem_size = torch.tensor([], dtype=torch.float16).element_size()
     total_bytes = torch.Size(shape).numel() * elem_size
     total_gb = total_bytes / (1024 ** 3)
 
